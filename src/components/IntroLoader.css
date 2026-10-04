@@ -45,7 +45,7 @@
 }
 
 .intro-character {
-  height: min(62vh, 620px);
+  height: min(62vh, 540px);
   display: flex;
   align-items: flex-end;
 }

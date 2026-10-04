@@ -4,6 +4,10 @@ import Terminal from "../components/Terminal";
 import Reveal from "../components/Reveal";
 import { profile, stats, marqueeWords } from "../data/content";
 
+const MARQUEE_SPLIT = Math.ceil(marqueeWords.length / 2);
+const MARQUEE_ROW_A = marqueeWords.slice(0, MARQUEE_SPLIT);
+const MARQUEE_ROW_B = marqueeWords.slice(MARQUEE_SPLIT);
+
 export default function Hero() {
   return (
     <header className="hero" id="top">
@@ -77,8 +81,17 @@ export default function Hero() {
         <Reveal as="div" delay={240} className="panel c-12 marquee-panel">
           <div className="marquee">
             <div className="marquee-track">
-              {[...marqueeWords, ...marqueeWords].map((w, i) => (
-                <span className="marquee-item mono" key={`${w}-${i}`}>
+              {[...MARQUEE_ROW_A, ...MARQUEE_ROW_A].map((w, i) => (
+                <span className="marquee-item mono" key={`a-${w}-${i}`}>
+                  {w}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="marquee">
+            <div className="marquee-track marquee-track--reverse">
+              {[...MARQUEE_ROW_B, ...MARQUEE_ROW_B].map((w, i) => (
+                <span className="marquee-item marquee-item--dim mono" key={`b-${w}-${i}`}>
                   {w}
                 </span>
               ))}

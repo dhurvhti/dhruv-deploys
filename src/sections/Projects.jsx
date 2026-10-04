@@ -3,6 +3,12 @@ import { projects } from "../data/content";
 
 const ACCENTS = ["accent", "accent-2", "accent-purple"];
 
+function handleSpotlight(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+  e.currentTarget.style.setProperty("--my", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+}
+
 export default function Projects() {
   return (
     <section className="section" id="projects">
@@ -18,8 +24,22 @@ export default function Projects() {
               as="article"
               delay={i * 90}
               key={p.index}
-              className={`panel panel--hover project-panel ${i === 0 ? "c-12" : "c-6"}`}
+              className={`panel panel--hover project-panel ${p.featured ? "project-panel--featured c-12" : "c-6"}`}
+              onMouseMove={p.featured ? handleSpotlight : undefined}
             >
+              {p.featured && (
+                <div className="project-chrome">
+                  <span className="project-dot project-dot--a" />
+                  <span className="project-dot project-dot--b" />
+                  <span className="project-dot project-dot--c" />
+                  <span className="project-chrome-label mono">cat ./projects/{p.index}.yml</span>
+                </div>
+              )}
+              {p.featured && (
+                <span className="project-ghost-index" aria-hidden="true">
+                  {p.index}
+                </span>
+              )}
               <div className="project-head">
                 <span className="project-index mono">{p.index}</span>
                 <p className="project-eyebrow mono">{p.eyebrow}</p>

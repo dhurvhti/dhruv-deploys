@@ -134,8 +134,13 @@
 }
 
 .marquee-panel {
-  padding: 18px 0;
+  padding: 16px 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  align-self: start;
 }
 
 .marquee {
@@ -149,9 +154,18 @@
   animation: marquee-scroll 24s linear infinite;
 }
 
+.marquee-track--reverse {
+  animation-direction: reverse;
+  animation-duration: 30s;
+}
+
 .marquee-item {
   font-size: 0.85rem;
   color: var(--ink-faint);
+}
+
+.marquee-item--dim {
+  opacity: 0.5;
 }
 
 .marquee-item::before {
@@ -257,12 +271,113 @@
 
 .project-bento {
   margin-top: 8px;
+  grid-auto-flow: dense;
 }
 
 .project-panel {
   padding: 30px;
   display: flex;
   flex-direction: column;
+}
+
+.project-panel--featured {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(var(--panel), var(--panel)),
+    linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-purple), var(--accent));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 100% 100%, 300% 100%;
+  animation: project-border-flow 8s linear infinite;
+}
+
+@keyframes project-border-flow {
+  to {
+    background-position: 0 0, -300% 0;
+  }
+}
+
+.project-panel--featured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.project-panel--featured:hover::after {
+  opacity: 1;
+}
+
+.project-panel--featured.panel--hover:hover {
+  border-color: transparent;
+}
+
+.project-chrome {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: -30px -30px 24px;
+  padding: 13px 18px;
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.project-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.project-dot--a {
+  background: #f2555a;
+}
+
+.project-dot--b {
+  background: #f0b429;
+}
+
+.project-dot--c {
+  background: var(--accent);
+}
+
+.project-chrome-label {
+  margin-left: 7px;
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+.project-ghost-index {
+  position: absolute;
+  right: 22px;
+  top: 52px;
+  font-family: var(--mono);
+  font-size: 7.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0.045;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.project-panel--featured h3 {
+  font-size: 1.65rem;
+  max-width: 640px;
+}
+
+.project-panel--featured .project-description {
+  max-width: 640px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-panel--featured {
+    animation: none;
+  }
 }
 
 .project-head {
