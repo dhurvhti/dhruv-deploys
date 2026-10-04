@@ -1,5 +1,3 @@
-import characterAnim from "../assets/character-anim.webm";
-import characterPoster from "../assets/character-poster.png";
 import Terminal from "../components/Terminal";
 import Reveal from "../components/Reveal";
 import { profile, stats, marqueeWords } from "../data/content";
@@ -8,7 +6,7 @@ const MARQUEE_SPLIT = Math.ceil(marqueeWords.length / 2);
 const MARQUEE_ROW_A = marqueeWords.slice(0, MARQUEE_SPLIT);
 const MARQUEE_ROW_B = marqueeWords.slice(MARQUEE_SPLIT);
 
-export default function Hero() {
+export default function Hero({ clip }) {
   return (
     <header className="hero" id="top">
       <div className="hero-intro">
@@ -34,8 +32,8 @@ export default function Hero() {
         <Reveal as="div" className="panel panel--hover c-4 profile-panel">
           <video
             className="profile-video"
-            src={characterAnim}
-            poster={characterPoster}
+            src={clip.video}
+            poster={clip.poster}
             autoPlay
             muted
             loop

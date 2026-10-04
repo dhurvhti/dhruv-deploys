@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import characterPoster from "../assets/character-poster.png";
-import characterAnim from "../assets/character-anim.webm";
 import "./IntroLoader.css";
 
 const GREETINGS = ["Hello", "Namaste", "Hola", "Bonjour", "こんにちは"];
 const DURATION = 5700;
 
-export default function IntroLoader({ onFinish, name = "Dhruv Khalasi" }) {
+export default function IntroLoader({ onFinish, clip, name = "Dhruv Khalasi" }) {
   const [progress, setProgress] = useState(0);
   const [greetIndex, setGreetIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -46,8 +44,8 @@ export default function IntroLoader({ onFinish, name = "Dhruv Khalasi" }) {
       <div className="intro-character">
         <video
           className="intro-character-video"
-          src={characterAnim}
-          poster={characterPoster}
+          src={clip.video}
+          poster={clip.poster}
           autoPlay
           muted
           playsInline
